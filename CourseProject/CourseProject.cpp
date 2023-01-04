@@ -10,7 +10,7 @@ int main()
 {
 	while (true)
 	{
-		writeMainMenu();
+		printMainMenu();
 		int choice;
 		std::cin >> choice;
 		run(choice);
@@ -27,7 +27,11 @@ void run(int choice) {
 	else if (choice == 3) {
 
 	}
+	else if (choice == 4) {
+
+	}
 	else {
-		std::cout << WrongInputMessage << std::endl;
+		printErrorMessage(WrongInputMessage);
+		printl("\n");
 	}
 }
