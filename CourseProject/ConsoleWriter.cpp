@@ -23,7 +23,7 @@ void printLogo() {
 
 void printMainMenu() {
 	printLogo();
-	printl("Welcome to SHA256 Text Manager!");
+	printl("Welcome to SHA-256 Text Manager!");
 	printl("Choose one of the options below:");
 	printl("================================");
 	printl("1. Hash message");
@@ -33,13 +33,21 @@ void printMainMenu() {
 	print("Enter option number: ");
 }
 
+void printSettingsMenu() {
+	printl("SETTINGS");
+	printl("========");
+	printl("1. Change text color");
+	printl("2. Change background color");
+	printl("3. Change text size");
+	printl("4. Back");
+	print("Enter option number: ");
+}
+
 void printErrorMessage(const char message[]) {
 	print("---");
 	int i = 0;
 	while (message[i++] != '\0')
-	{
 		print("-");
-	}
 	printl("---");
 
 	print("|| ");
@@ -49,8 +57,6 @@ void printErrorMessage(const char message[]) {
 	print("---");
 	i = 0;
 	while (message[i++] != '\0')
-	{
 		print("-");
-	}
 	printl("---");
 }

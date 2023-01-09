@@ -4,7 +4,7 @@
 #include "HashManager.h"
 #include "Constants.h"
 
-void run(int choice);
+void run(int choice, bool &exit);
 
 int main()
 {
@@ -13,22 +13,34 @@ int main()
 		printMainMenu();
 		int choice;
 		std::cin >> choice;
-		run(choice);
+
+		bool exit = false;
+		run(choice, exit);
+		if (exit)
+			return 0;
 	}
 }
 
-void run(int choice) {
+void run(int choice, bool& exit) {
+	//hash
 	if (choice == 1) {
-
+		hash("hello world", 11);
 	}
+	//dehash
 	else if (choice == 2) {
 
 	}
+	//settings
 	else if (choice == 3) {
-
+		choice = 0;
+		printSettingsMenu();
+		std::cin >> choice;
+		//cases of settings
 	}
+	//exit
 	else if (choice == 4) {
-
+		exit = true;
+		return;
 	}
 	else {
 		printErrorMessage(WrongInputMessage);
