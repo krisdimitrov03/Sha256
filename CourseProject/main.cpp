@@ -1,10 +1,10 @@
 #include <iostream>
-#include "ConsoleWriter.h"
-#include "FileManager.h"
-#include "HashManager.h"
-#include "Constants.h"
+#include "./include/console_writer.h"
+#include "./include/file_manager.h"
+#include "./include/hash_manager.h"
+#include "./include/helper/message_constants.h"
 
-void run(int choice, bool &exit);
+void run(int choice, bool& exit);
 
 int main()
 {
@@ -43,7 +43,7 @@ void run(int choice, bool& exit) {
 		return;
 	}
 	else {
-		printErrorMessage(WrongInputMessage);
+		printErrorMessage(WRONG_INPUT_MESSAGE);
 		printl("\n");
 	}
 }

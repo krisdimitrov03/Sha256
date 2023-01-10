@@ -2,8 +2,6 @@
 
 void printMainMenu();
 
-void printLogo();
-
 void printErrorMessage(const char message[]);
 
 void printSettingsMenu();

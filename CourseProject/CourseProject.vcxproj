@@ -139,16 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleWriter.cpp" />
-    <ClCompile Include="CourseProject.cpp" />
-    <ClCompile Include="FileManager.cpp" />
-    <ClCompile Include="HashManager.cpp" />
+    <ClCompile Include="src\console_writer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\file_manager.cpp" />
+    <ClCompile Include="src\hash_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleWriter.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="FileManager.h" />
-    <ClInclude Include="HashManager.h" />
+    <ClInclude Include="include\console_writer.h" />
+    <ClInclude Include="include\helper\menu_constants.h" />
+    <ClInclude Include="include\helper\message_constants.h" />
+    <ClInclude Include="include\file_manager.h" />
+    <ClInclude Include="include\hash_manager.h" />
+    <ClInclude Include="include\helper\size_constants.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

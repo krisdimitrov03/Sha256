@@ -18,30 +18,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CourseProject.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleWriter.cpp">
+    <ClCompile Include="src\console_writer.cpp">
       <Filter>Source Files\Operators</Filter>
     </ClCompile>
-    <ClCompile Include="FileManager.cpp">
+    <ClCompile Include="src\file_manager.cpp">
       <Filter>Source Files\Operators</Filter>
     </ClCompile>
-    <ClCompile Include="HashManager.cpp">
+    <ClCompile Include="src\hash_manager.cpp">
       <Filter>Source Files\Operators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConsoleWriter.h">
+    <ClInclude Include="include\console_writer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.h">
+    <ClInclude Include="include\file_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HashManager.h">
+    <ClInclude Include="include\hash_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
+    <ClInclude Include="include\helper\message_constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\helper\size_constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\helper\menu_constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

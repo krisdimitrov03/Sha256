@@ -1,12 +1,12 @@
 #include <iostream>
 #include <bitset>
-#include "HashManager.h"
-#include "ConsoleWriter.h"
-#include "Constants.h"
+#include "../include/hash_manager.h"
+#include "../include/console_writer.h"
+#include "../include/helper/size_constants.h"
 
 char** generateConstants();
-int* preProcessInput(const char* message, int length);
-int** splitInput(const int* input);
+int* preProcessInput(const char* message, int length, int& destSize);
+int** splitInput(const int* input, int size);
 int** getChunk(int** words, char** constants);
 
 //help functions
@@ -19,8 +19,9 @@ int* shR(int* bitSet, int repeat);
 int* sum(int* num1, int* num2, int* num3, int* num4);
 
 char* hash(const char* message, int length) {
-	int* input = preProcessInput(message, length);
-	int** words = splitInput(input);
+	int inputSize = 0;
+	int* input = preProcessInput(message, length, inputSize);
+	int** words = splitInput(input, inputSize);
 	char** constants = generateConstants();
 
 	int** chunk = getChunk(words, constants);
@@ -32,10 +33,12 @@ char* dehash(const char* hashedMessage, int length) {
 	return new char[6];
 }
 
-int* preProcessInput(const char* message, int length) {
+int* preProcessInput(const char* message, int length, int& destSize) {
 	int size = 512;
 	while (length * 8 > size - 65)
 		size *= 2;
+
+	destSize = size;
 
 	int* bits = new int[size] {0};
 	int i = 0;
@@ -57,8 +60,16 @@ int* preProcessInput(const char* message, int length) {
 	return bits;
 }
 
-int** splitInput(const int* input) {
-	return new int* [6];
+int** splitInput(const int* input, int size) {
+	int** words = new int* [size];
+
+	for (int i = 0; i < size / 32; i++) {
+		words[i] = new int[32]{ 0 };
+		for (int j = 0; j < 32; j++)
+			words[i][j] = input[i * 32 + j];
+	}
+
+	return words;
 }
 
 char** generateConstants() {
@@ -70,7 +81,7 @@ int** getChunk(int** words, char** constants) {
 
 	for (int i = 0; i < 16; i++)
 		result[i] = words[i];
-	
+
 	for (int i = 0; i < 48; i++)
 	{
 		result[i + 16] = sum(
