@@ -1,5 +1,5 @@
 #pragma once
 
-char *read();
+const char *read(const char* filename, bool& nameExists);
 
-void write(const char* text);
+void write(const char* text, const char* filename);

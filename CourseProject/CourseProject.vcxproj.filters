@@ -47,8 +47,13 @@
     <ClInclude Include="include\helper\size_constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\helper\menu_constants.h">
+    <ClInclude Include="include\helper\components.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="readable.txt">
+      <Filter>Header Files</Filter>
+    </Xsd>
   </ItemGroup>
 </Project>

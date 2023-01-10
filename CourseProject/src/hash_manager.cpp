@@ -18,19 +18,19 @@ int* rotR(int* bitSet, int repeat);
 int* shR(int* bitSet, int repeat);
 int* sum(int* num1, int* num2, int* num3, int* num4);
 
-char* hash(const char* message, int length) {
+const char* hash(const char* message, int length) {
 	int inputSize = 0;
 	int* input = preProcessInput(message, length, inputSize);
-	int** words = splitInput(input, inputSize);
-	char** constants = generateConstants();
+	//int** words = splitInput(input, inputSize);
+	//char** constants = generateConstants();
 
-	int** chunk = getChunk(words, constants);
+	//int** chunk = getChunk(words, constants);
 
-	return new char[6];
+	return "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9";
 }
 
-char* dehash(const char* hashedMessage, int length) {
-	return new char[6];
+const char* dehash(const char* hashedMessage, int length) {
+	return "";
 }
 
 int* preProcessInput(const char* message, int length, int& destSize) {
