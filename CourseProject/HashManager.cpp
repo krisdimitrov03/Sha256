@@ -2,8 +2,87 @@
 #include <bitset>
 #include "HashManager.h"
 #include "ConsoleWriter.h"
+#include "Constants.h"
 
-const int MAX_BINARY_SIZE = 8;
+char** generateConstants();
+int* preProcessInput(const char* message, int length);
+int** splitInput(const int* input);
+int** getChunk(int** words, char** constants);
+
+//help functions
+int binaryLen(int number);
+int* binary(int number);
+int* bigBinary(int number);
+int* xOr(int* num1, int* num2, int* num3);
+int* rotR(int* bitSet, int repeat);
+int* shR(int* bitSet, int repeat);
+int* sum(int* num1, int* num2, int* num3, int* num4);
+
+char* hash(const char* message, int length) {
+	int* input = preProcessInput(message, length);
+	int** words = splitInput(input);
+	char** constants = generateConstants();
+
+	int** chunk = getChunk(words, constants);
+
+	return new char[6];
+}
+
+char* dehash(const char* hashedMessage, int length) {
+	return new char[6];
+}
+
+int* preProcessInput(const char* message, int length) {
+	int size = 512;
+	while (length * 8 > size - 65)
+		size *= 2;
+
+	int* bits = new int[size] {0};
+	int i = 0;
+	for (; i < length; i++)
+	{
+		int* binaryNum = binary(message[i]);
+		for (int j = 0; j < MAX_LETTER_BINARY_SIZE; j++)
+			bits[i * 8 + j] = binaryNum[j];
+	}
+	bits[(i++) * 8] = 1;
+
+	int* lengthInBinary = bigBinary(length * 8);
+	int lengthInBinaryLength = binaryLen(length * 8);
+	for (int i = 0; i < lengthInBinaryLength; i++)
+	{
+		bits[size - i - 1] = lengthInBinary[lengthInBinaryLength - i - 1];
+	}
+
+	return bits;
+}
+
+int** splitInput(const int* input) {
+	return new int* [6];
+}
+
+char** generateConstants() {
+	return new char* [6];
+}
+
+int** getChunk(int** words, char** constants) {
+	int** result = new int* [MAX_CHUNK_SIZE];
+
+	for (int i = 0; i < 16; i++)
+		result[i] = words[i];
+	
+	for (int i = 0; i < 48; i++)
+	{
+		result[i + 16] = sum(
+			result[i],
+			xOr(rotR(result[i + 1], 7), rotR(result[i + 1], 18), shR(result[i + 1], 3)),
+			result[i + 9],
+			xOr(rotR(result[i + 14], 17), rotR(result[i + 14], 19), shR(result[i + 14], 10))
+		);
+	}
+
+	return result;
+}
 
 int binaryLen(int number) {
 	int result = 0;
@@ -16,11 +95,11 @@ int binaryLen(int number) {
 }
 
 int* binary(int number) {
-	int result[MAX_BINARY_SIZE]{ 0 };
+	int result[MAX_LETTER_BINARY_SIZE]{ 0 };
 	int i = 0;
 	while (number > 0)
 	{
-		result[MAX_BINARY_SIZE - (i++) - 1] = number % 2;
+		result[MAX_LETTER_BINARY_SIZE - (i++) - 1] = number % 2;
 		number /= 2;
 	}
 
@@ -38,44 +117,34 @@ int* bigBinary(int number) {
 	return result;
 }
 
-int* preProcessInput(const char* message, int length) {
-	int size = 512;
-	while (length * 8 > size - 65)
-		size *= 2;
+int* xOr(int* num1, int* num2, int* num3) {
+	int* result = new int[MAX_WORD_BINARY_SIZE];
+	for (int i = 0; i < MAX_WORD_BINARY_SIZE; i++)
+		result[i] = num1[i] ^ num2[i] ^ num3[i];
+	return result;
+}
 
-	int* bits = new int[size] {0};
-	int i = 0;
-	for (; i < length; i++)
+int* rotR(int* bitSet, int repeat) {
+	for (int i = 0; i < repeat; i++)
 	{
-		int* binaryNum = binary(message[i]);
-		for (int j = 0; j < MAX_BINARY_SIZE; j++)
-			bits[i * 8 + j] = binaryNum[j];
+		int temp = bitSet[MAX_WORD_BINARY_SIZE - 1];
+		for (int j = MAX_WORD_BINARY_SIZE - 1; j > 0; j--)
+			bitSet[j] = bitSet[j - 1];
+		bitSet[0] = temp;
 	}
-	bits[(i++) * 8] = 1;
+	return bitSet;
+}
 
-	int* lengthInBinary = bigBinary(length * 8);
-	int lengthInBinaryLength = binaryLen(length * 8);
-	for (int i = 0; i < lengthInBinaryLength; i++)
+int* shR(int* bitSet, int repeat) {
+	for (int i = 0; i < repeat; i++)
 	{
-		bits[size - i - 1] = lengthInBinary[lengthInBinaryLength - i - 1];
+		for (int j = MAX_WORD_BINARY_SIZE - 1; j > 0; j--)
+			bitSet[j] = bitSet[j - 1];
+		bitSet[0] = 0;
 	}
-
-	return bits;
+	return bitSet;
 }
 
-int** splitInput(const int* input) {
-	
-}
-
-char* hash(const char* message, int length) {
-	int* input = preProcessInput(message, length);
-	int** words = splitInput(input);
-
-
-
-	return new char[5];
-}
-
-char* dehash(const char* hashedMessage, int length) {
-	return new char[5];
+int* sum(int* num1, int* num2, int* num3, int* num4) {
+	return new int[6];
 }
