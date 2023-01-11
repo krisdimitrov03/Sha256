@@ -7,7 +7,10 @@
 char** generateConstants();
 int* preProcessInput(const char* message, int length, int& destSize);
 int** splitInput(const int* input, int size);
-int** getChunk(int** words, char** constants);
+int** getChunk(int** words);
+int** getKConstants(int** chunk, char** constants);
+int** getHashInBinary(int** kConstants, int& binaryHashLength);
+const char* hex(int** binaryHash, int binaryHashLength);
 
 //help functions
 int binaryLen(int number);
@@ -21,12 +24,16 @@ int* sum(int* num1, int* num2, int* num3, int* num4);
 const char* hash(const char* message, int length) {
 	int inputSize = 0;
 	int* input = preProcessInput(message, length, inputSize);
-	//int** words = splitInput(input, inputSize);
-	//char** constants = generateConstants();
+	int** words = splitInput(input, inputSize);
 
-	//int** chunk = getChunk(words, constants);
+	int** chunk = getChunk(words);
+	char** hConstants = generateConstants();
+	int** kConstants = getKConstants(chunk, hConstants);
+	int binaryHashLength = 0;
+	int** binaryHash = getHashInBinary(kConstants, binaryHashLength);
 
-	return "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9";
+	//return "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9";
+	return hex(binaryHash, binaryHashLength);
 }
 
 const char* dehash(const char* hashedMessage, int length) {
@@ -76,7 +83,7 @@ char** generateConstants() {
 	return new char* [6];
 }
 
-int** getChunk(int** words, char** constants) {
+int** getChunk(int** words) {
 	int** result = new int* [MAX_CHUNK_SIZE];
 
 	for (int i = 0; i < 16; i++)
@@ -93,6 +100,18 @@ int** getChunk(int** words, char** constants) {
 	}
 
 	return result;
+}
+
+int** getKConstants(int** chunk, char** constants) {
+	return new int* [5];
+}
+
+int** getHashInBinary(int** kConstants, int& binaryHashLength) {
+	return new int* [5];
+}
+
+const char* hex(int** binaryHash, int binaryHashLength) {
+	return "";
 }
 
 int binaryLen(int number) {
