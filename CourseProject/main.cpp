@@ -27,7 +27,8 @@ int main()
 void run(int choice, bool& exit) {
 	//hash
 	if (choice == 1) {
-		system("cls");
+		hash("hello world", 11);
+		/*system("cls");
 		print("Enter file name: ");
 		char* filename = new char{ '0' };
 		std::cin >> filename;
@@ -43,7 +44,7 @@ void run(int choice, bool& exit) {
 		print("Your hashed message: ");
 		printl(result);
 		printl("Press any key to continue...");
-		_getch();
+		_getch();*/
 	}
 	//dehash
 	else if (choice == 2) {

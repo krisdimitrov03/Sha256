@@ -143,6 +143,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\file_manager.cpp" />
     <ClCompile Include="src\hash_manager.cpp" />
+    <ClCompile Include="src\math_operator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\console_writer.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="include\file_manager.h" />
     <ClInclude Include="include\hash_manager.h" />
     <ClInclude Include="include\helper\size_constants.h" />
+    <ClInclude Include="include\math_operator.h" />
   </ItemGroup>
   <ItemGroup>
     <Xsd Include="readable.txt">
