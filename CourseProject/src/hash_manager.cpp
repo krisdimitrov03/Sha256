@@ -10,35 +10,27 @@ int** generateKConstants();
 int* preProcessInput(const char* message, int length, int& destSize);
 int** splitInput(const int* input, int size);
 int** getChunk(int** words);
-int** getHashInBinary(int** kConstants, int& binaryHashLength);
-const char* hex(int** binaryHash, int binaryHashLength);
-
+int** modifyAtoHConstants(int** chunk, int** kConstants, int** hConstants);
+int** sumOldAndNewConstants(int** oldConstants, int** newConstants);
+const char* getHash(int** binaryHash, int binaryHashLength);
 
 const char* hash(const char* message, int length) {
+	int** kConstants = generateKConstants();
 	int inputSize = 0;
 	int* input = preProcessInput(message, length, inputSize);
 	int** words = splitInput(input, inputSize);
 
-	//int** chunk = getChunk(words);
+	int** chunk = getChunk(words);
 	int** hConstants = generateAtoHConstants();
-	int** kConstants = generateKConstants();
-	/*for (int i = 0; i < 64; i++)
-	{
-		for (int j = 0; j < 32; j++)
-		{
-			std::cout << kConstants[i][j];
-		}
-		std::cout << std::endl;
-	}*/
+	int** modifiedConstants = modifyAtoHConstants(chunk, kConstants, hConstants);
 	int binaryHashLength = 0;
-	int** binaryHash = getHashInBinary(kConstants, binaryHashLength);
+	int** binaryHash = sumOldAndNewConstants(hConstants, modifiedConstants);
 
-	//return "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9";
-	return hex(binaryHash, binaryHashLength);
+	return getHash(binaryHash, binaryHashLength);
 }
 
 const char* dehash(const char* hashedMessage, int length) {
-	return "";
+	return "Not Implemented";
 }
 
 int* preProcessInput(const char* message, int length, int& destSize) {
@@ -95,13 +87,13 @@ int** generateAtoHConstants() {
 int** generateKConstants() {
 	int** result = new int* [MAX_WORD_BINARY_SIZE] {0};
 
-	//Solve Problem
+	int* primes = getFirstNPrimes(64);
 
-	/*for (int i = 2, count = 0; count < K_CONSTANTS_COUNT; i++)
-		if (isPrime(i)) {
-			long long constant = getConstantInDecimal(i, "cbrt");
-			result[count++] = binary(constant, MAX_WORD_BINARY_SIZE);
-		}*/
+	for (int i = 0; i < 64; i++)
+	{
+		long long constant = getConstantInDecimal(primes[i], "cbrt");
+		result[i] = binary(constant, 32);
+	}
 
 	return result;
 }
@@ -125,10 +117,50 @@ int** getChunk(int** words) {
 	return result;
 }
 
-int** getHashInBinary(int** kConstants, int& binaryHashLength) {
-	return new int* [5];
+int** modifyAtoHConstants(int** chunk, int** kConstants, int** hConstants) {
+	int** result = hConstants;
+
+	for (int i = 0; i < 64; i++)
+	{
+		int* word = chunk[i];
+		int* kConst = kConstants[i];
+		int* sigma1 = xOr(rotR(result[4], 6), rotR(result[4], 11), rotR(result[4], 25));
+		int* sigma0 = xOr(rotR(result[0], 2), rotR(result[0], 13), rotR(result[0], 22));
+		int* choice = xOr(bAnd(result[4], result[5]), bAnd(bNot(result[4]), result[6]));
+		int* majority = xOr(bAnd(result[0], result[1]), bAnd(result[0], result[2]), bAnd(result[1], result[2]));
+
+		int* temp1 = sum(result[7], sigma1, choice, kConst, word);
+		int* temp2 = sum(sigma0, majority);
+
+		for (int i = 7; i > 0; i--)
+			result[i] = result[i - 1];
+
+		result[0] = sum(temp1, temp2);
+		result[4] = sum(result[4], temp1);
+	}
+
+	return result;
 }
 
-const char* hex(int** binaryHash, int binaryHashLength) {
-	return "";
+int** sumOldAndNewConstants(int** oldConstants, int** newConstants) {
+	int** result = new int* [MAX_WORD_BINARY_SIZE];
+
+	for (int i = 0; i < 8; i++)
+		result[i] = sum(oldConstants[i], newConstants[i]);
+
+	return result;
+}
+
+const char* getHash(int** binaryHash, int binaryHashLength) {
+	char* result = new char[81] {'\0'};
+	int hexNumLen = 0;
+
+	for (int i = 0; i < 80; i += hexNumLen)
+	{
+		char* hexNum = hex(binaryHash[i], 32, hexNumLen);
+		for (int j = 0; j < hexNumLen; j++)
+			result[j + i] = hexNum[j];
+	}
+
+	return result;
 }

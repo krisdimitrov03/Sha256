@@ -43,8 +43,8 @@ void run(int choice, bool& exit) {
 		const char* result = hash(message, 11);
 		print("Your hashed message: ");
 		printl(result);
-		printl("Press any key to continue...");
-		_getch();*/
+		printl("Press any key to continue...");*/
+		_getch();
 	}
 	//dehash
 	else if (choice == 2) {

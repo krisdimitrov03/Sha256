@@ -11,6 +11,16 @@ bool isPrime(int number) {
 			return false;
 }
 
+int* getFirstNPrimes(int count) {
+	int* result = new int[count];
+
+	for (int num = 2, i = 0; i < count; num++)
+		if (isPrime(num))
+			result[i++] = num;
+
+	return result;
+}
+
 long long getConstantInDecimal(int num, const char* rootType) {
 	double root;
 	if (rootType == "sqrt")
@@ -21,6 +31,10 @@ long long getConstantInDecimal(int num, const char* rootType) {
 	root -= (int)root;
 
 	return (long long)(root * pow(2, 32));
+}
+
+char* hex(int* binary, int length, int& hexLen) {
+	return new char[5];
 }
 
 int binaryLen(long long number) {
@@ -54,9 +68,13 @@ int* binary(long long number, int padSize) {
 }
 
 int* xOr(int* num1, int* num2, int* num3) {
+	return xOr(xOr(num1, num2), num3);
+}
+
+int* xOr(int* num1, int* num2) {
 	int* result = new int[MAX_WORD_BINARY_SIZE];
 	for (int i = 0; i < MAX_WORD_BINARY_SIZE; i++)
-		result[i] = num1[i] ^ num2[i] ^ num3[i];
+		result[i] = num1[i] ^ num2[i];
 	return result;
 }
 
@@ -81,6 +99,36 @@ int* shR(int* bitSet, int repeat) {
 	return bitSet;
 }
 
+int* bAnd(int* num1, int* num2) {
+	int* result = new int[32];
+
+	for (int i = 0; i < 32; i++)
+		result[i] = num1[i] & num2[i];
+
+	return result;
+}
+
+int* bNot(int* bitSet) {
+	int* result = new int[32];
+
+	for (int i = 0; i < 32; i++)
+		result[i] = bitSet[i] == 1 ? 0 : 1;
+
+	return result;
+}
+
+int* sum(int* num1, int* num2, int* num3, int* num4, int* num5) {
+	return sum(sum(num1, num2, num3, num4), num5);
+}
+
 int* sum(int* num1, int* num2, int* num3, int* num4) {
-	return new int[6];
+	return sum(sum(num1, num2, num3), num4);
+}
+
+int* sum(int* num1, int* num2, int* num3) {
+	return sum(sum(num1, num2), num3);
+}
+
+int* sum(int* num1, int* num2) {
+	return new int[5];
 }
