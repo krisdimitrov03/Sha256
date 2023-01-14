@@ -19,12 +19,24 @@ const char* hash(const char* message, int length) {
 	int inputSize = 0;
 	int* input = preProcessInput(message, length, inputSize);
 	int** words = splitInput(input, inputSize);
-
+	
 	int** chunk = getChunk(words);
 	int** hConstants = generateAtoHConstants();
+	
+	int* suma = sum(hConstants[0], hConstants[1]);
+
 	int** modifiedConstants = modifyAtoHConstants(chunk, kConstants, hConstants);
 	int binaryHashLength = 0;
 	int** binaryHash = sumOldAndNewConstants(hConstants, modifiedConstants);
+
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 32; j++)
+		{
+			std::cout << binaryHash[i][j];
+		}
+		std::cout << std::endl;
+	}
 
 	return getHash(binaryHash, binaryHashLength);
 }
@@ -86,7 +98,6 @@ int** generateAtoHConstants() {
 
 int** generateKConstants() {
 	int** result = new int* [MAX_WORD_BINARY_SIZE] {0};
-
 	int* primes = getFirstNPrimes(64);
 
 	for (int i = 0; i < 64; i++)

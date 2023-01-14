@@ -9,7 +9,7 @@ long long getConstantInDecimal(int num, const char* rootType);
 
 char* hex(int* binary, int length, int& hexLen);
 
-int* binary(long long number, int padSize = -1);
+int* binary(long long number, int padSize = DEFAULT_VALUE);
 
 int binaryLen(long long number);
 

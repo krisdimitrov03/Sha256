@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\validator.h" />
     <ClCompile Include="src\console_writer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\file_manager.cpp" />

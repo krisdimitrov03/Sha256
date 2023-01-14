@@ -130,5 +130,18 @@ int* sum(int* num1, int* num2, int* num3) {
 }
 
 int* sum(int* num1, int* num2) {
-	return new int[5];
+	int result[MAX_WORD_BINARY_SIZE]{ 0 };
+
+	int carry = 0;
+	for (int i = MAX_WORD_BINARY_SIZE - 1; i >= 0; i--)
+	{
+		int current = num1[i] ^ num2[i] ^ carry;
+		result[i] = current;
+		if (current == 0 && (num1[i] != 0 || num2[i] != 0))
+			carry = 1;
+		else
+			carry = 0;
+	}
+
+	return result;
 }
