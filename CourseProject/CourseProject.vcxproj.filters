@@ -59,10 +59,16 @@
     <ClInclude Include="include\math_operator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\helper\hex_constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xsd Include="readable.txt">
       <Filter>Header Files</Filter>
     </Xsd>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="writable.txt" />
   </ItemGroup>
 </Project>

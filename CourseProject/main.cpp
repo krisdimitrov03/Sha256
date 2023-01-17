@@ -27,7 +27,8 @@ int main()
 void run(int choice, bool& exit) {
 	//hash
 	if (choice == 1) {
-		hash("hello world", 11);
+		//printl(hash("hello world", 11));
+		printl(hash("hello world"));
 		/*system("cls");
 		print("Enter file name: ");
 		char* filename = new char{ '0' };

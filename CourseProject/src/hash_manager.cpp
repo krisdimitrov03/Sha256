@@ -12,33 +12,57 @@ int** splitInput(const int* input, int size);
 int** getChunk(int** words);
 int** modifyAtoHConstants(int** chunk, int** kConstants, int** hConstants);
 int** sumOldAndNewConstants(int** oldConstants, int** newConstants);
-const char* getHash(int** binaryHash, int binaryHashLength);
+const char* getHash(int** binaryHash);
 
-const char* hash(const char* message, int length) {
+//vremenna funkciq
+//void print(int* arr, int length) {
+//	for (int i = 0; i < length; i++)
+//	{
+//		std::cout << arr[i];
+//	}
+//	std::cout << std::endl;
+//}
+
+const char* hash(const char* message) {
+	int length = 0;
+	while (message[length++] != '\0');
+	length--;
 	int** kConstants = generateKConstants();
 	int inputSize = 0;
 	int* input = preProcessInput(message, length, inputSize);
 	int** words = splitInput(input, inputSize);
-	
+
 	int** chunk = getChunk(words);
+	/*for (int i = 0; i < 16; i++)
+	{
+		print(chunk[i], 32);
+	}*/
+
 	int** hConstants = generateAtoHConstants();
-	
-	int* suma = sum(hConstants[0], hConstants[1]);
 
 	int** modifiedConstants = modifyAtoHConstants(chunk, kConstants, hConstants);
-	int binaryHashLength = 0;
+	/*for (int i = 0; i < 8; i++)
+	{
+		print(modifiedConstants[i], 32);
+	}*/
+
+	/*print(hConstants[0], 32);
+	print(modifiedConstants[0], 32);
+	printl("--------------------------------");
+	print(sum(hConstants[0], modifiedConstants[0]), 32);*/
+
 	int** binaryHash = sumOldAndNewConstants(hConstants, modifiedConstants);
 
-	for (int i = 0; i < 8; i++)
+	/*for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 32; j++)
 		{
 			std::cout << binaryHash[i][j];
 		}
 		std::cout << std::endl;
-	}
+	}*/
 
-	return getHash(binaryHash, binaryHashLength);
+	return getHash(binaryHash);
 }
 
 const char* dehash(const char* hashedMessage, int length) {
@@ -129,13 +153,28 @@ int** getChunk(int** words) {
 }
 
 int** modifyAtoHConstants(int** chunk, int** kConstants, int** hConstants) {
-	int** result = hConstants;
+	int** result = new int* [MAX_WORD_BINARY_SIZE] {0};
+	for (int i = 0; i < MAX_WORD_BINARY_SIZE; i++)
+		result[i] = hConstants[i];
 
 	for (int i = 0; i < 64; i++)
 	{
 		int* word = chunk[i];
 		int* kConst = kConstants[i];
-		int* sigma1 = xOr(rotR(result[4], 6), rotR(result[4], 11), rotR(result[4], 25));
+
+		int* leftE = rotR(result[4], 6);
+		int* midE = rotR(result[4], 11);
+		int* rightE = rotR(result[4], 25);
+		int* sigma1 = xOr(leftE, midE, rightE);
+		/*print(result[4], 32);
+		printl("--");
+		print(leftE, 32);
+		print(midE, 32);
+		print(rightE, 32);
+		printl("--------------------------------");
+		print(sigma1, 32);*/
+
+
 		int* sigma0 = xOr(rotR(result[0], 2), rotR(result[0], 13), rotR(result[0], 22));
 		int* choice = xOr(bAnd(result[4], result[5]), bAnd(bNot(result[4]), result[6]));
 		int* majority = xOr(bAnd(result[0], result[1]), bAnd(result[0], result[2]), bAnd(result[1], result[2]));
@@ -143,11 +182,26 @@ int** modifyAtoHConstants(int** chunk, int** kConstants, int** hConstants) {
 		int* temp1 = sum(result[7], sigma1, choice, kConst, word);
 		int* temp2 = sum(sigma0, majority);
 
+		/*print("Sigma0: ");
+		print(sigma0, 32);
+		print(" Major: ");
+		print(majority, 32);
+		printl("        --------------------------------");
+		print(" Temp2: ");
+
+		print(temp2, 32);
+		printl("");*/
+
 		for (int i = 7; i > 0; i--)
 			result[i] = result[i - 1];
 
 		result[0] = sum(temp1, temp2);
 		result[4] = sum(result[4], temp1);
+
+		/*for (int i = 0; i < 8; i++)
+		{
+			print(result[i], 32);
+		}*/
 	}
 
 	return result;
@@ -162,14 +216,15 @@ int** sumOldAndNewConstants(int** oldConstants, int** newConstants) {
 	return result;
 }
 
-const char* getHash(int** binaryHash, int binaryHashLength) {
-	char* result = new char[81] {'\0'};
-	int hexNumLen = 0;
+const char* getHash(int** binaryHash) {
+	int resLen = (MAX_WORD_BINARY_SIZE / 4) * 8;
+	char* result = new char[resLen + 1]{ '\0' };
+	int counter = 0;
 
-	for (int i = 0; i < 80; i += hexNumLen)
+	for (int i = 0; i < 64; i += 8)
 	{
-		char* hexNum = hex(binaryHash[i], 32, hexNumLen);
-		for (int j = 0; j < hexNumLen; j++)
+		char* hexNum = hex(binaryHash[counter++]);
+		for (int j = 0; j < 8; j++)
 			result[j + i] = hexNum[j];
 	}
 

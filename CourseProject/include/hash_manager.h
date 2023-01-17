@@ -6,7 +6,7 @@
 *   \param length - the length of the message
 *   \return string - hashed message
 **/
-const char* hash(const char* message, int length);
+const char* hash(const char* message);
 
 /**
 *   \brief Gets hashed message and its length and returns the dehashed message as a string.
