@@ -14,4 +14,8 @@ const int H_CONSTANTS_COUNT = 8;
 
 const int K_CONSTANTS_COUNT = 64;
 
+const int HASH_LENGTH = 64;
+
 const int DEFAULT_VALUE = -1;
+
+const int MAX_MESSAGE_LENGTH = 1000;

@@ -1,36 +1,38 @@
 #pragma once
 #include "./helper/size_constants.h"
 
-bool isPrime(int number);
+namespace math {
+	bool isPrime(int number);
 
-int* getFirstNPrimes(int count);
+	int* getFirstNPrimes(int count);
 
-long long getConstantInDecimal(int num, const char* rootType);
+	long long getConstantInDecimal(int num, const char* rootType);
 
-char* hex(int* binary);
+	char* hex(int* binary);
 
-int* binary(long long number, int padSize = DEFAULT_VALUE);
+	int* binary(long long number, int padSize = DEFAULT_VALUE);
 
-int decimal(int* number, int length);
+	int decimal(int* number, int length);
 
-int binaryLen(long long number);
+	int binaryLen(long long number);
 
-///bitwise operations
+	///bitwise operations
 
-int* xOr(int* num1, int* num2, int* num3);
-int* xOr(int* num1, int* num2);
+	int* xOr(int* num1, int* num2, int* num3);
+	int* xOr(int* num1, int* num2);
 
-int* rotR(int* bitSet, int repeat);
+	int* rotR(int* bitSet, int repeat);
 
-int* shR(int* bitSet, int repeat);
+	int* shR(int* bitSet, int repeat);
 
-int* bAnd(int* num1, int* num2);
+	int* bAnd(int* num1, int* num2);
 
-int* bNot(int* bitSet);
+	int* bNot(int* bitSet);
 
-int truthTable(int left, int right, int& carry);
+	int truthTable(int left, int right, int& carry);
 
-int* sum(int* num1, int* num2, int* num3, int* num4, int* num5);
-int* sum(int* num1, int* num2, int* num3, int* num4);
-int* sum(int* num1, int* num2, int* num3);
-int* sum(int* num1, int* num2);
+	int* sum(int* num1, int* num2, int* num3, int* num4, int* num5);
+	int* sum(int* num1, int* num2, int* num3, int* num4);
+	int* sum(int* num1, int* num2, int* num3);
+	int* sum(int* num1, int* num2);
+}

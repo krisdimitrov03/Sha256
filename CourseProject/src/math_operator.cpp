@@ -3,7 +3,7 @@
 #include "../include/helper/size_constants.h"
 #include "../include/helper/hex_constants.h"
 
-bool isPrime(int number) {
+bool math::isPrime(int number) {
 	if (number == 0 || number == 1)
 		return false;
 
@@ -12,7 +12,7 @@ bool isPrime(int number) {
 			return false;
 }
 
-int* getFirstNPrimes(int count) {
+int* math::getFirstNPrimes(int count) {
 	int* result = new int[count];
 
 	for (int num = 2, i = 0; i < count; num++)
@@ -22,7 +22,7 @@ int* getFirstNPrimes(int count) {
 	return result;
 }
 
-long long getConstantInDecimal(int num, const char* rootType) {
+long long math::getConstantInDecimal(int num, const char* rootType) {
 	double root;
 	if (rootType == "sqrt")
 		root = sqrt(num);
@@ -34,7 +34,7 @@ long long getConstantInDecimal(int num, const char* rootType) {
 	return (long long)(root * pow(2, 32));
 }
 
-char* hex(int* binary) {
+char* math::hex(int* binary) {
 	char* result = new char[(MAX_WORD_BINARY_SIZE / 4) + 1]{ '\0' };
 	int counter = 0;
 
@@ -49,7 +49,7 @@ char* hex(int* binary) {
 	return result;
 }
 
-int binaryLen(long long number) {
+int math::binaryLen(long long number) {
 	int result = 0;
 	while (number > 0)
 	{
@@ -59,7 +59,7 @@ int binaryLen(long long number) {
 	return result;
 }
 
-int* binary(long long number, int padSize) {
+int* math::binary(long long number, int padSize) {
 	int* result;
 	int resultLength = 0;
 	if (padSize != DEFAULT_VALUE)
@@ -79,7 +79,7 @@ int* binary(long long number, int padSize) {
 	return result;
 }
 
-int decimal(int* number, int length) {
+int math::decimal(int* number, int length) {
 	int result = 0;
 
 	for (int i = 0; i < length; i++)
@@ -90,18 +90,18 @@ int decimal(int* number, int length) {
 	return result;
 }
 
-int* xOr(int* num1, int* num2, int* num3) {
+int* math::xOr(int* num1, int* num2, int* num3) {
 	return xOr(xOr(num1, num2), num3);
 }
 
-int* xOr(int* num1, int* num2) {
+int* math::xOr(int* num1, int* num2) {
 	int* result = new int[MAX_WORD_BINARY_SIZE];
 	for (int i = 0; i < MAX_WORD_BINARY_SIZE; i++)
 		result[i] = num1[i] ^ num2[i];
 	return result;
 }
 
-int* rotR(int* bitSet, int repeat) {
+int* math::rotR(int* bitSet, int repeat) {
 	int* result = new int[MAX_WORD_BINARY_SIZE] { 0 };
 	for (int i = 0; i < MAX_WORD_BINARY_SIZE; i++)
 		result[i] = bitSet[i];
@@ -116,7 +116,7 @@ int* rotR(int* bitSet, int repeat) {
 	return result;
 }
 
-int* shR(int* bitSet, int repeat) {
+int* math::shR(int* bitSet, int repeat) {
 	int* result = new int[MAX_WORD_BINARY_SIZE] { 0 };
 	for (int i = 0; i < MAX_WORD_BINARY_SIZE; i++)
 		result[i] = bitSet[i];
@@ -130,7 +130,7 @@ int* shR(int* bitSet, int repeat) {
 	return result;
 }
 
-int* bAnd(int* num1, int* num2) {
+int* math::bAnd(int* num1, int* num2) {
 	int* result = new int[32];
 
 	for (int i = 0; i < 32; i++)
@@ -139,7 +139,7 @@ int* bAnd(int* num1, int* num2) {
 	return result;
 }
 
-int* bNot(int* bitSet) {
+int* math::bNot(int* bitSet) {
 	int* result = new int[32];
 
 	for (int i = 0; i < 32; i++)
@@ -148,7 +148,7 @@ int* bNot(int* bitSet) {
 	return result;
 }
 
-int truthTable(int left, int right, int& carry) {
+int math::truthTable(int left, int right, int& carry) {
 	int res = 0;
 	if (!left && !right) {
 		res = left ^ right ^ carry;
@@ -178,19 +178,19 @@ int truthTable(int left, int right, int& carry) {
 	return res;
 }
 
-int* sum(int* num1, int* num2, int* num3, int* num4, int* num5) {
+int* math::sum(int* num1, int* num2, int* num3, int* num4, int* num5) {
 	return sum(sum(num1, num2, num3, num4), num5);
 }
 
-int* sum(int* num1, int* num2, int* num3, int* num4) {
+int* math::sum(int* num1, int* num2, int* num3, int* num4) {
 	return sum(sum(num1, num2, num3), num4);
 }
 
-int* sum(int* num1, int* num2, int* num3) {
+int* math::sum(int* num1, int* num2, int* num3) {
 	return sum(sum(num1, num2), num3);
 }
 
-int* sum(int* num1, int* num2) {
+int* math::sum(int* num1, int* num2) {
 	int* result = new int[MAX_WORD_BINARY_SIZE] { 0 };
 	int carry = 0;
 

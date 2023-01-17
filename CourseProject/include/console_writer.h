@@ -1,11 +1,13 @@
 #pragma once
 
-void printMainMenu();
+namespace console {
+	void printMainMenu();
 
-void printErrorMessage(const char message[]);
+	void printErrorMessage(const char message[]);
 
-void printSettingsMenu();
+	void printSettingsMenu();
 
-void print(const char message[]);
+	void print(const char message[]);
 
-void printl(const char message[]);
+	void printl(const char message[]);
+}

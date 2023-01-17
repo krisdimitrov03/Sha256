@@ -3,7 +3,7 @@
 #include "../include/console_writer.h"
 #include "../include/file_manager.h"
 
-const char* read(const char* filename, bool& nameExists) {
+const char* file::read(const char* filename, bool& nameExists) {
 	std::ifstream file(filename);
 
 	if (file.is_open()) {
@@ -18,11 +18,11 @@ const char* read(const char* filename, bool& nameExists) {
 		return result;
 	}
 	else {
-		printErrorMessage("Cannot open this file. Try again with another name.");
+		console::printErrorMessage("Cannot open this file. Try again with another name.");
 		return "failed";
 	}
 }
 
-void write(const char* text, const char* filename) {
+void file::write(const char* text, const char* filename) {
 
 }

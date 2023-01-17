@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\validator.h" />
+    <ClCompile Include="src\app.cpp" />
     <ClCompile Include="src\console_writer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\file_manager.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="src\math_operator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\app.h" />
     <ClInclude Include="include\console_writer.h" />
     <ClInclude Include="include\helper\components.h" />
     <ClInclude Include="include\helper\hex_constants.h" />
