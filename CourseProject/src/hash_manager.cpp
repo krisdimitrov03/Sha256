@@ -15,54 +15,37 @@ int** sumOldAndNewConstants(int** oldConstants, int** newConstants);
 const char* getHash(int** binaryHash);
 
 //vremenna funkciq
-//void print(int* arr, int length) {
-//	for (int i = 0; i < length; i++)
-//	{
-//		std::cout << arr[i];
-//	}
-//	std::cout << std::endl;
-//}
+void print(int* arr, int length) {
+	for (int i = 0; i < length; i++)
+	{
+		std::cout << arr[i];
+	}
+	std::cout << std::endl;
+}
 
 const char* hash(const char* message) {
 	int length = 0;
 	while (message[length++] != '\0');
 	length--;
 	int** kConstants = generateKConstants();
-	int inputSize = 0;
-	int* input = preProcessInput(message, length, inputSize);
-	int** words = splitInput(input, inputSize);
-
-	int** chunk = getChunk(words);
-	/*for (int i = 0; i < 16; i++)
-	{
-		print(chunk[i], 32);
-	}*/
-
 	int** hConstants = generateAtoHConstants();
+	int inputSize = 0;
+	int* entireInput = preProcessInput(message, length, inputSize);
 
-	int** modifiedConstants = modifyAtoHConstants(chunk, kConstants, hConstants);
-	/*for (int i = 0; i < 8; i++)
+	for (int i = 0; i < inputSize / 512; i++)
 	{
-		print(modifiedConstants[i], 32);
-	}*/
+		int* input = new int[512];
 
-	/*print(hConstants[0], 32);
-	print(modifiedConstants[0], 32);
-	printl("--------------------------------");
-	print(sum(hConstants[0], modifiedConstants[0]), 32);*/
+		for (int j = 0; j < 512; j++)
+			input[j] = entireInput[j + i * 512];
 
-	int** binaryHash = sumOldAndNewConstants(hConstants, modifiedConstants);
+		int** words = splitInput(input, 512);
+		int** chunk = getChunk(words);
+		int** modifiedConstants = modifyAtoHConstants(chunk, kConstants, hConstants);
+		hConstants = sumOldAndNewConstants(hConstants, modifiedConstants);
+	}
 
-	/*for (int i = 0; i < 8; i++)
-	{
-		for (int j = 0; j < 32; j++)
-		{
-			std::cout << binaryHash[i][j];
-		}
-		std::cout << std::endl;
-	}*/
-
-	return getHash(binaryHash);
+	return getHash(hConstants);
 }
 
 const char* dehash(const char* hashedMessage, int length) {

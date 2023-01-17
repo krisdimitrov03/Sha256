@@ -27,24 +27,26 @@ int main()
 void run(int choice, bool& exit) {
 	//hash
 	if (choice == 1) {
-		//printl(hash("hello world", 11));
-		printl(hash("hello world"));
-		/*system("cls");
+		//printl(hash(TEST_INPUT));
+		//printl(hash("hello world"));
+		//system("cls");
+		printl("Make sure the text in your file is no longer than 500 characters.");
 		print("Enter file name: ");
-		char* filename = new char{ '0' };
+		char* filename = new char[502] { '0' };
 		std::cin >> filename;
 		bool nameExists = false;
 		const char* message = read(filename, nameExists);
 
 		if (!nameExists) {
+			print(" Press any key to continue...");
 			_getch();
 			return;
 		}
 
-		const char* result = hash(message, 11);
+		const char* result = hash(TEST_INPUT);
 		print("Your hashed message: ");
 		printl(result);
-		printl("Press any key to continue...");*/
+		printl("Press any key to continue...");
 		_getch();
 	}
 	//dehash
