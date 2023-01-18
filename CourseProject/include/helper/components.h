@@ -28,4 +28,11 @@ R"( SETTINGS
  3. Change text size
  4. Back)";
 
+const char* HASH_MENU =
+R"( HASH
+ ====
+ 1. Input message in the console
+ 2. Read message from file
+ 3. Back)";
+
 const char* ENTER_OPTION = "Enter option number: ";

@@ -1,3 +1,7 @@
 #pragma once
 
-bool validateInput(char value);
+namespace security {
+	bool validateChar(char value);
+
+	bool validateMessageLength(const char* message);
+}

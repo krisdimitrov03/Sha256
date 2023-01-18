@@ -146,6 +146,7 @@
     <ClCompile Include="src\file_manager.cpp" />
     <ClCompile Include="src\hash_manager.cpp" />
     <ClCompile Include="src\math_operator.cpp" />
+    <ClCompile Include="src\validator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\app.h" />

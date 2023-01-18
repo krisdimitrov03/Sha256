@@ -1,39 +1,39 @@
 #include <iostream>
-#include <conio.h>
 #include "../include/console_writer.h"
 #include "../include/file_manager.h"
 #include "../include/hash_manager.h"
 #include "../include/helper/message_constants.h"
 #include "../include/helper/size_constants.h"
+#include "../include/validator.h"
 #include "../include/app.h"
 
-void runHashChoice(int choice, bool& exit);
-void runDehashChoice(int choice, bool& exit);
-void runSettingsChoice(int choice, bool& exit);
-void runExitChoice(int choice, bool& exit);
+void runHashChoice(int choice);
+void runDehashChoice(int choice);
+void runSettingsChoice(int choice);
+void runExitChoice(bool& exit);
 void runErrorCase();
 
 void app::run() {
 	int choice;
 	while (true)
 	{
-		system("cls");
+		console::clear();
 		console::printMainMenu();
 		std::cin >> choice;
 		bool exit = false;
 
 		switch (choice) {
 		case 1:
-			runHashChoice(choice, exit);
+			runHashChoice(choice);
 			break;
 		case 2:
-			runDehashChoice(choice, exit);
+			runDehashChoice(choice);
 			break;
 		case 3:
-			runSettingsChoice(choice, exit);
+			runSettingsChoice(choice);
 			break;
 		case 4:
-			runExitChoice(choice, exit);
+			runExitChoice(exit);
 			break;
 		default:
 			runErrorCase();
@@ -45,46 +45,80 @@ void app::run() {
 	}
 }
 
-void runHashChoice(int choice, bool& exit) {
-	//printl(hash(TEST_INPUT));
-		//printl(hash("hello world"));
-		//system("cls");
-	console::printl("Make sure the text in your file is no longer than 500 characters.");
-	console::print("Enter file name: ");
-	char* filename = new char[MAX_MESSAGE_LENGTH + 2]{ '0' };
-	std::cin >> filename;
-	bool nameExists = false;
-	const char* message = file::read(filename, nameExists);
+void runHashChoice(int choice) {
+	console::clear();
+	console::printHashMenu();
+	std::cin >> choice;
 
-	if (!nameExists) {
-		console::print(" Press any key to continue...");
-		(void)_getch();
+	if (choice == 3)
+		return;
+	if (choice != 1 && choice != 2) {
+		console::printErrorMessage(WRONG_INPUT_MESSAGE);
+		console::print(PRESS_KEY);
+		console::readkey();
 		return;
 	}
 
-	const char* result = sha256::hash(TEST_INPUT);
-	console::print("Your hashed message: ");
-	console::printl(result);
-	console::printl("Press any key to continue...");
-	(void)_getch();
+	char* message = new char[MAX_MESSAGE_LENGTH + 2]{ '\0' };
+	console::clear();
+
+	switch (choice) {
+	case 1:
+		console::printl("Enter message(No longer than 1000 characters):");
+		//TODO
+		std::cin.getline(message, MAX_MESSAGE_LENGTH + 2);
+		break;
+	case 2:
+		char* filename = new char[102];
+		bool nameExists = false;
+		console::print("Enter file name: ");
+		std::cin >> filename;
+		const char* fileResult = file::read(filename, nameExists);
+
+		console::printl("");
+
+		if (!nameExists) {
+			console::print(PRESS_KEY);
+			console::readkey();
+			return;
+		}
+
+		message = (char*)fileResult;
+		break;
+	}
+
+	//TODO
+	/*bool isLengthValid = security::validateMessageLength(message);
+
+	if (!isLengthValid) {
+		console::printErrorMessage("Message longer than 1000 characters!");
+		console::print(PRESS_KEY);
+		console::readkey();
+	}*/
+
+	const char* result = sha256::hash(message);
+	console::printl("Your hashed message:");
+	console::printl("");
+	console::printMessage(result);
+	console::printl("");
+	console::printl(PRESS_KEY);
+	console::readkey();
 }
 
-void runDehashChoice(int choice, bool& exit) {
+void runDehashChoice(int choice) {
 
 }
 
-void runSettingsChoice(int choice, bool& exit) {
-	system("cls");
-	choice = 0;
+void runSettingsChoice(int choice) {
+	console::clear();
 	console::printSettingsMenu();
 	std::cin >> choice;
-	//cases of settings
 }
 
-void runExitChoice(int choice, bool& exit) {
+void runExitChoice(bool& exit) {
 	exit = true;
-	system("cls");
-	console::printl("Bye, bye, User! :(");
+	console::clear();
+	console::printMessage("Goodbye! See you soon!");
 	return;
 }
 
@@ -92,5 +126,5 @@ void runErrorCase() {
 	system("cls");
 	console::printErrorMessage(WRONG_INPUT_MESSAGE);
 	console::printl("\n");
-	(void)_getch();
+	console::readkey();
 }
