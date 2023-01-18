@@ -18,4 +18,10 @@ namespace console {
 	void clear();
 
 	void readkey();
+
+	void read(char* dest);
+
+	void read(int& value);
+
+	void readLine(char* dest, int length);
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/console_writer.h"
+#include "../include/console_operator.h"
 #include "../include/file_manager.h"
 #include "../include/hash_manager.h"
 #include "../include/helper/message_constants.h"
@@ -48,7 +48,7 @@ void app::run() {
 void runHashChoice(int choice) {
 	console::clear();
 	console::printHashMenu();
-	std::cin >> choice;
+	console::read(choice);
 
 	if (choice == 3)
 		return;
@@ -65,8 +65,7 @@ void runHashChoice(int choice) {
 	switch (choice) {
 	case 1:
 		console::printl("Enter message(No longer than 1000 characters):");
-		//TODO
-		std::cin.getline(message, MAX_MESSAGE_LENGTH + 2);
+		console::readLine(message, MAX_MESSAGE_LENGTH + 2);
 		break;
 	case 2:
 		char* filename = new char[102];
@@ -87,16 +86,15 @@ void runHashChoice(int choice) {
 		break;
 	}
 
-	//TODO
-	/*bool isLengthValid = security::validateMessageLength(message);
-
-	if (!isLengthValid) {
-		console::printErrorMessage("Message longer than 1000 characters!");
+	if (!(security::validateMessageLength(message))) {
+		console::printErrorMessage("Message must be between 1 and 1000 characters!");
 		console::print(PRESS_KEY);
 		console::readkey();
-	}*/
+		return;
+	}
 
 	const char* result = sha256::hash(message);
+	file::write(result, "writable.txt");
 	console::printl("Your hashed message:");
 	console::printl("");
 	console::printMessage(result);
@@ -125,6 +123,7 @@ void runExitChoice(bool& exit) {
 void runErrorCase() {
 	system("cls");
 	console::printErrorMessage(WRONG_INPUT_MESSAGE);
-	console::printl("\n");
+	console::printl("");
+	console::print(PRESS_KEY);
 	console::readkey();
 }

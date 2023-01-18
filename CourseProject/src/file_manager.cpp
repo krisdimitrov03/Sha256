@@ -1,20 +1,17 @@
 #include <iostream>
 #include <fstream>
-#include "../include/console_writer.h"
+#include "../include/helper/size_constants.h"
+#include "../include/console_operator.h"
 #include "../include/file_manager.h"
 
 const char* file::read(const char* filename, bool& nameExists) {
 	std::ifstream file(filename);
 
 	if (file.is_open()) {
-		char* result = new char[502] {'\0'};
+		char* result = new char[MAX_MESSAGE_LENGTH + 2]{ '\0' };
+		file.read(result, MAX_MESSAGE_LENGTH + 2);
 		nameExists = true;
-		int i = 0;
-		/*char current = file.getline(result, 501);
-		while (current != '\0') {
-			result[i++] = current;
-			current = file.get();
-		}*/
+		file.close();
 		return result;
 	}
 	else {
@@ -24,5 +21,16 @@ const char* file::read(const char* filename, bool& nameExists) {
 }
 
 void file::write(const char* text, const char* filename) {
+	std::ofstream file(filename);
 
+	if (file.is_open()) {
+		int length = 0;
+		while (text[length++] != '\0');
+		length--;
+		file.write(text, length);
+		file.close();
+	}
+	else {
+		console::printErrorMessage("Cannot open this file. Try again with another name.");
+	}
 }

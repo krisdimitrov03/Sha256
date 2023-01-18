@@ -1,6 +1,6 @@
 #include <iostream>
 #include <conio.h>
-#include "../include/console_writer.h"
+#include "../include/console_operator.h"
 #include "../include/helper/components.h"
 
 void console::print(const char* message) {
@@ -69,4 +69,19 @@ void console::printMessage(const char* message) {
 	while (message[i++] != '\0')
 		print("*");
 	printl("**");
+}
+
+void console::read(char* dest) {
+	std::cin.ignore();
+	std::cin >> dest;
+}
+
+void console::read(int& value) {
+	std::cin.ignore();
+	std::cin >> value;
+}
+
+void console::readLine(char* dest, int length) {
+	std::cin.ignore();
+	std::cin.getline(dest, length);
 }
