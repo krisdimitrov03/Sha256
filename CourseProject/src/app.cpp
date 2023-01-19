@@ -2,6 +2,7 @@
 #include "../include/console_operator.h"
 #include "../include/file_manager.h"
 #include "../include/hash_manager.h"
+#include "../include/string_operator.h"
 #include "../include/helper/message_constants.h"
 #include "../include/helper/size_constants.h"
 #include "../include/validator.h"
@@ -14,6 +15,7 @@ void runExitChoice(bool& exit);
 void runErrorCase();
 
 void app::run() {
+	system("Color 3");
 	int choice;
 	while (true)
 	{
@@ -94,7 +96,7 @@ void runHashChoice(int choice) {
 	}
 
 	const char* result = sha256::hash(message);
-	file::write(result, "writable.txt");
+	file::write(string::concat(message, " : ", result), "writable.txt");
 	console::printl("Your hashed message:");
 	console::printl("");
 	console::printMessage(result);
