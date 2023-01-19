@@ -5,7 +5,9 @@
 #include "../include/string_operator.h"
 #include "../include/helper/message_constants.h"
 #include "../include/helper/size_constants.h"
+#include "../include/helper/color_constants.h"
 #include "../include/validator.h"
+#include "../include/decoration_manager.h"
 #include "../include/app.h"
 
 void runHashChoice(int choice);
@@ -15,7 +17,6 @@ void runExitChoice(bool& exit);
 void runErrorCase();
 
 void app::run() {
-	system("Color 3");
 	int choice;
 	while (true)
 	{
@@ -61,7 +62,7 @@ void runHashChoice(int choice) {
 		return;
 	}
 
-	char* message = new char[MAX_MESSAGE_LENGTH + 2]{ '\0' };
+	char* message = new char[MAX_MESSAGE_LENGTH + 2] { '\0' };
 	console::clear();
 
 	switch (choice) {
@@ -113,6 +114,15 @@ void runSettingsChoice(int choice) {
 	console::clear();
 	console::printSettingsMenu();
 	std::cin >> choice;
+
+	switch (choice) {
+	case 1:
+		//console::printColorsMenu();
+		color::changeBackColor(BLUE);
+		break;
+	/*case 2:
+		break;*/
+	}
 }
 
 void runExitChoice(bool& exit) {

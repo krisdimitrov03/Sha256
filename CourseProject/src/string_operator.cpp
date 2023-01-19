@@ -7,7 +7,7 @@ const char* string::concat(const char* leftStr, const char* rightStr) {
 	leftLen--;
 	rightLen--;
 
-	char* result = new char[leftLen + rightLen];
+	char* result = new char[leftLen + rightLen + 1] {'\0'};
 
 	for (int i = 0; i < leftLen; i++)
 		result[i] = leftStr[i];

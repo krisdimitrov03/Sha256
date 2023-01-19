@@ -143,6 +143,7 @@
     <ClCompile Include="src\app.cpp" />
     <ClCompile Include="src\console_operator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\decoration_manager.cpp" />
     <ClCompile Include="src\file_manager.cpp" />
     <ClCompile Include="src\hash_manager.cpp" />
     <ClCompile Include="src\math_operator.cpp" />
@@ -152,6 +153,8 @@
   <ItemGroup>
     <ClInclude Include="include\app.h" />
     <ClInclude Include="include\console_operator.h" />
+    <ClInclude Include="include\decoration_manager.h" />
+    <ClInclude Include="include\helper\color_constants.h" />
     <ClInclude Include="include\helper\components.h" />
     <ClInclude Include="include\helper\hex_constants.h" />
     <ClInclude Include="include\helper\message_constants.h" />

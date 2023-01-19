@@ -12,12 +12,3 @@ bool security::validateMessageLength(const char* message)
 	
 	return count < 1000 && count > 0;
 }
-
-//bool security::validateMessageLength(const char* message)
-//{
-//	int count = 0;
-//	while (message[count++] != '\0');
-//	count--;
-//
-//	return count < 1000 && count > 0;
-//}
