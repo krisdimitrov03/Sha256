@@ -16,7 +16,8 @@ void console::clear() {
 }
 
 void console::readkey() {
-	(void)_getch();
+	//(void)_getch();
+	std::cin.get();
 }
 
 void console::printMainMenu() {

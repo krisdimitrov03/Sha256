@@ -4,11 +4,11 @@
 #include "../include/string_operator.h"
 
 void color::changeForeColor(const char color) {
-	const char* command = string::concat("Color ", new char[2] { color });
-	system(command);
+	const char* command = string::concat("\x1b[38;5;", new char[2]{ color }, "m");
+	std::cout << command;
 }
 
 void color::changeBackColor(const char color) {
-	const char* command = string::concat("Color ", new char[3] { color, '0' });
-	system(command);
+	const char* command = string::concat("\x1b[48;5;", new char[2]{ color }, "m");
+	std::cout << command;
 }

@@ -118,10 +118,11 @@ void runSettingsChoice(int choice) {
 	switch (choice) {
 	case 1:
 		//console::printColorsMenu();
-		color::changeBackColor(BLUE);
+		color::changeForeColor(BLUE);
 		break;
-	/*case 2:
-		break;*/
+	case 2:
+		color::changeBackColor(RED);
+		break;
 	}
 }
 

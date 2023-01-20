@@ -21,7 +21,7 @@ const char* file::read(const char* filename, bool& nameExists) {
 }
 
 void file::write(const char* text, const char* filename) {
-	std::ofstream file(filename);
+	std::ofstream file(filename, std::ios::app);
 
 	if (file.is_open()) {
 		int length = 0;
