@@ -50,5 +50,11 @@ This is an application for hashing text message by `SHA-256` algorithm (part of 
   - **Light**
   - **Colorized**
 - ### Validations
+  #### There are two main constraints which the input should handle:
+  - **Char constraint** - all characters should be from the standart ASCII table (from 0 to 128)
+  - **Length constraint** - the length of the message should be between 1 and 1000
+  #### That is why, before the hashing algorithm is processed, the text message goes through two validations:
+  - `validateChar()`
+  - `validateMessageLength()`
 
 **Note:** No external libraries were used for creating the application except from `<fstream>`.
