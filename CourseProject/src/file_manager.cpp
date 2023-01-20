@@ -2,6 +2,7 @@
 #include <fstream>
 #include "../include/helper/size_constants.h"
 #include "../include/console_operator.h"
+#include "../include/string_operator.h"
 #include "../include/file_manager.h"
 
 const char* file::read(const char* filename, bool& nameExists) {
@@ -33,4 +34,8 @@ void file::write(const char* text, const char* filename) {
 	else {
 		console::printErrorMessage("Cannot open this file. Try again with another name.");
 	}
+}
+
+void file::writel(const char* text, const char* filename) {
+	write(string::concat(text, "\n"), filename);
 }

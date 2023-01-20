@@ -1,31 +1,30 @@
 #pragma once
 
 const char* LOGO =
-"+----------------------------------------------+\n"
-"|  \x1B[38;5;4m ####  \x1B[38;5;10m#   #  \x1B[38;5;1m ###     \x1B[38;5;4m####   \x1B[38;5;10m####   \x1B[38;5;1m ###  \x1B[38;5;15m |\n"
-"|  \x1B[38;5;4m#      \x1B[38;5;10m#   #  \x1B[38;5;1m#   #    \x1B[38;5;4m    #  \x1B[38;5;10m#      \x1B[38;5;1m#     \x1B[38;5;15m |\n"
-"|  \x1B[38;5;4m ###   \x1B[38;5;10m#####  \x1B[38;5;1m#####    \x1B[38;5;4m ###   \x1B[38;5;10m####   \x1B[38;5;1m####  \x1B[38;5;15m |\n"
-"|  \x1B[38;5;4m    #  \x1B[38;5;10m#   #  \x1B[38;5;1m#   #    \x1B[38;5;4m#      \x1B[38;5;10m    #  \x1B[38;5;1m#   # \x1B[38;5;15m |\n"
-"|  \x1B[38;5;4m####   \x1B[38;5;10m#   #  \x1B[38;5;1m#   #    \x1B[38;5;4m#####  \x1B[38;5;10m####   \x1B[38;5;1m ###  \x1B[38;5;15m |\n"
-"|                                              |\n"
-"|         Kristian Dimitrov 8MI0600166         |\n"
-"+ ---------------------------------------------+\n";
+R"(+----------------------------------------------+
+|   ####  #   #   ###     ####   ####    ###   |
+|  #      #   #  #   #        #  #      #      |
+|   ###   #####  #####     ###   ####   ####   |
+|      #  #   #  #   #    #          #  #   #  |
+|  ####   #   #  #   #    #####  ####    ###   |
+|                                              |
+|         Kristian Dimitrov 8MI0600166         |
++----------------------------------------------+)";
 
 const char* MAIN_MENU =
-" Welcome to SHA-256 Text Manager!\n"
-" Choose one of the options below:\n"
-" ================================\n"
-" 1. Hash message\n"
-" 2. Dehash message\n"
-" 3. Settings\n"
-" 4. Exit\n";
+R"( Welcome to SHA-256 Text Manager!
+ Choose one of the options below:
+ ================================
+ 1. Hash message
+ 2. Change theme
+ 3. Exit)";
 
 const char* SETTINGS_MENU =
-R"( SETTINGS
- ========
- 1. Change text color
- 2. Change background color
- 3. Change text size
+R"( Theme Settings
+ ==============
+ 1. Dark Theme
+ 2. Light Theme
+ 3. Colorized Theme
  4. Back)";
 
 const char* HASH_MENU =

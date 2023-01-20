@@ -38,10 +38,6 @@ const char* sha256::hash(const char* message) {
 	return getHash(hConstants);
 }
 
-const char* sha256::dehash(const char* hashedMessage) {
-	return "Not Implemented";
-}
-
 int* preProcessInput(const char* message, int length, int& destSize) {
 	int size = PRE_PROCESS_INPUT_START_SIZE;
 	while (length * MAX_LETTER_BINARY_SIZE > size - 65)

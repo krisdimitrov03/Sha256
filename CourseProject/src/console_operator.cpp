@@ -1,5 +1,4 @@
 #include <iostream>
-#include <conio.h>
 #include "../include/console_operator.h"
 #include "../include/helper/components.h"
 
@@ -16,8 +15,8 @@ void console::clear() {
 }
 
 void console::readkey() {
-	//(void)_getch();
 	std::cin.get();
+	std::cin.ignore();
 }
 
 void console::printMainMenu() {

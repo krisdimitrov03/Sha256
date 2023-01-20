@@ -161,6 +161,7 @@
     <ClInclude Include="include\file_manager.h" />
     <ClInclude Include="include\hash_manager.h" />
     <ClInclude Include="include\helper\size_constants.h" />
+    <ClInclude Include="include\helper\theme_constants.h" />
     <ClInclude Include="include\math_operator.h" />
     <ClInclude Include="include\string_operator.h" />
   </ItemGroup>

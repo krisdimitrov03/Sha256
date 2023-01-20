@@ -11,13 +11,13 @@
 #include "../include/app.h"
 
 void runHashChoice(int choice);
-void runDehashChoice(int choice);
 void runSettingsChoice(int choice);
 void runExitChoice(bool& exit);
 void runErrorCase();
 
 void app::run() {
 	int choice;
+	char theme = 'D';
 	while (true)
 	{
 		console::clear();
@@ -30,12 +30,9 @@ void app::run() {
 			runHashChoice(choice);
 			break;
 		case 2:
-			runDehashChoice(choice);
-			break;
-		case 3:
 			runSettingsChoice(choice);
 			break;
-		case 4:
+		case 3:
 			runExitChoice(exit);
 			break;
 		default:
@@ -57,7 +54,7 @@ void runHashChoice(int choice) {
 		return;
 	if (choice != 1 && choice != 2) {
 		console::printErrorMessage(WRONG_INPUT_MESSAGE);
-		console::print(PRESS_KEY);
+		console::print(PRESS_KEY_MESSAGE);
 		console::readkey();
 		return;
 	}
@@ -80,7 +77,7 @@ void runHashChoice(int choice) {
 		console::printl("");
 
 		if (!nameExists) {
-			console::print(PRESS_KEY);
+			console::print(PRESS_KEY_MESSAGE);
 			console::readkey();
 			return;
 		}
@@ -91,23 +88,32 @@ void runHashChoice(int choice) {
 
 	if (!(security::validateMessageLength(message))) {
 		console::printErrorMessage("Message must be between 1 and 1000 characters!");
-		console::print(PRESS_KEY);
+		console::print(PRESS_KEY_MESSAGE);
 		console::readkey();
 		return;
 	}
+	int i = 0;
+	while (message[i] != '\0')
+	{
+		if (!(security::validateChar(message[i++]))) {
+			console::printErrorMessage("Invalid characters detected! Try again.");
+			console::print(PRESS_KEY_MESSAGE);
+			console::readkey();
+			return;
+		}
+	}
 
 	const char* result = sha256::hash(message);
-	file::write(string::concat(message, " : ", result), "writable.txt");
+	file::writel(string::concat(message, " : ", result), "writable.txt");
 	console::printl("Your hashed message:");
 	console::printl("");
 	console::printMessage(result);
 	console::printl("");
-	console::printl(PRESS_KEY);
+	console::printl(SAVED_MESSAGE);
+	console::printl("");
+	console::printl(PRESS_KEY_MESSAGE);
+	std::cin.ignore();
 	console::readkey();
-}
-
-void runDehashChoice(int choice) {
-
 }
 
 void runSettingsChoice(int choice) {
@@ -117,11 +123,18 @@ void runSettingsChoice(int choice) {
 
 	switch (choice) {
 	case 1:
-		//console::printColorsMenu();
-		color::changeForeColor(BLUE);
+		color::changeTheme('D');
 		break;
 	case 2:
-		color::changeBackColor(RED);
+		color::changeTheme('L');
+		break;
+	case 3:
+		color::changeTheme('C');
+		break;
+	case 4:
+		break;
+	default:
+		runErrorCase();
 		break;
 	}
 }
@@ -134,9 +147,9 @@ void runExitChoice(bool& exit) {
 }
 
 void runErrorCase() {
-	system("cls");
+	console::clear();
 	console::printErrorMessage(WRONG_INPUT_MESSAGE);
 	console::printl("");
-	console::print(PRESS_KEY);
+	console::print(PRESS_KEY_MESSAGE);
 	console::readkey();
 }
