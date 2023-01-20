@@ -38,6 +38,15 @@ This is an application for hashing text message by `SHA-256` algorithm (part of 
   - Turning the result into hexadecimal - `getHash()`
 
 - ### Reading message from hash
+  The user should type hash in the console and this hash is being searched in the `writable.txt` file and if it's found - the app returns the dehashed message. Here is an example:
+  #### Input:
+  ```
+  b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+  ```
+  #### Output:
+  ```
+  hello world
+  ```
 - ### Reading from console
   This functionality is realised in the `read()` function overloads for `char*` and `int` placed in `console_operator.cpp`. It is used to read a message from the console, no matter if there are spaces in it.
 - ### Reading from file
