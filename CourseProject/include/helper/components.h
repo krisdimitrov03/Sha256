@@ -31,8 +31,9 @@ R"( Welcome to SHA-256 Text Manager!
  Choose one of the options below:
  ================================
  1. Hash message
- 2. Change theme
- 3. Exit)";
+ 2. Dehash message
+ 3. Change theme
+ 4. Exit)";
 
 const char* SETTINGS_MENU =
 R"( Theme Settings

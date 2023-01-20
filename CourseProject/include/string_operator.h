@@ -30,4 +30,13 @@ namespace string {
 	*   @return char* - the result of concatenating the three strings
 	**/
 	const char* concat(const char* leftStr, const char* midStr, const char* rightStr);
+
+	/**
+	*   @param str - char*, full string
+	*	@param length - int, the lenght of str
+	*   @return char* - substring, representing only the hashValue
+	**/
+	const char* getHashSubstring(const char* str, int length);
+
+	const char* getMessageSubstring(const char* str);
 }

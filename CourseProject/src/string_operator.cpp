@@ -9,7 +9,7 @@
 * @idnumber 8MI0600166
 * @compiler VC
 *
-* <functions for concatenating strings (char*)>
+* <functions for string (char*) operations>
 *
 */
 
@@ -34,4 +34,34 @@ const char* string::concat(const char* leftStr, const char* rightStr) {
 
 const char* string::concat(const char* leftStr, const char* midStr, const char* rightStr) {
 	return concat(concat(leftStr, midStr), rightStr);
+}
+
+const char* string::getHashSubstring(const char* str, int length)
+{
+	char* result = new char[length + 1] {'\0'};
+	int index = 0;
+	while (str[index] != '\0') {
+		if (str[index] == ':') {
+			index += 2;
+			break;
+		}
+		index++;
+	}
+	int resultIndex = 0;
+	while (str[index] != '\0')
+		result[resultIndex++] = str[index++];
+
+	return result;
+}
+
+const char* string::getMessageSubstring(const char* str)
+{
+	int length = 0;
+	while (str[length++] != ':');
+	char* result = new char[length] {'\0'};
+
+	for (int i = 0; i < length - 2; i++)
+		result[i] = str[i];
+
+	return result;
 }

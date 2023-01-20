@@ -24,6 +24,12 @@ namespace file {
 	const char* read(const char* filename, bool& nameExists);
 
 	/**
+	*   @param filename - char*, name of the file
+	*   @return char** - gets all the lines in the file
+	**/
+	char** readAllLines(const char* filename, int& length);
+
+	/**
 	*	Writes the message in the file with filename
 	*   @param text - char*, message
 	*   @param filename - char*, name of the file

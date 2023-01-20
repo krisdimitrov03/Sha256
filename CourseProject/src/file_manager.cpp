@@ -24,7 +24,7 @@ const char* file::read(const char* filename, bool& nameExists) {
 	std::ifstream file(filename);
 
 	if (file.is_open()) {
-		char* result = new char[MAX_MESSAGE_LENGTH + 2]{ '\0' };
+		char* result = new char[MAX_MESSAGE_LENGTH + 2] { '\0' };
 		file.read(result, MAX_MESSAGE_LENGTH + 2);
 		nameExists = true;
 		file.close();
@@ -33,6 +33,29 @@ const char* file::read(const char* filename, bool& nameExists) {
 	else {
 		console::printErrorMessage("Cannot open this file. Try again with another name.");
 		return "failed";
+	}
+}
+
+char** file::readAllLines(const char* filename, int& length) {
+	std::ifstream file(filename);
+
+	if (file.is_open()) {
+		int initLength = MAX_MESSAGE_LENGTH + MAX_CHUNK_SIZE + 4;
+		int i = 0;
+		char** result = new char* [initLength];
+		char* line = new char [initLength] {'\0'};
+		file.getline(line, initLength);
+		while (line[0] != '\0') {
+			result[i] = new char[initLength] {'\0'};
+			for (int j = 0; line[j] != '\0'; j++)
+				result[i][j] = line[j];
+			length++;
+			file.getline(line, initLength);
+		}
+		return result;
+	}
+	else {
+		return new char* [5];
 	}
 }
 

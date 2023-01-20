@@ -26,6 +26,7 @@
 #include "../include/app.h"
 
 void runHashChoice(int choice);
+void runDehashChoice();
 void runSettingsChoice(int choice);
 void runExitChoice(bool& exit);
 void runErrorCase();
@@ -45,9 +46,12 @@ void app::run() {
 			runHashChoice(choice);
 			break;
 		case 2:
-			runSettingsChoice(choice);
+			runDehashChoice();
 			break;
 		case 3:
+			runSettingsChoice(choice);
+			break;
+		case 4:
 			runExitChoice(exit);
 			break;
 		default:
@@ -128,6 +132,35 @@ void runHashChoice(int choice) {
 	console::printl("");
 	console::printl(PRESS_KEY_MESSAGE);
 	std::cin.ignore();
+	console::readkey();
+}
+
+void runDehashChoice() {
+	console::clear();
+	char* hash = new char[MAX_CHUNK_SIZE + 1] { '\0' };
+	console::print("Enter your hash: ");
+	console::read(hash);
+	if (hash[MAX_CHUNK_SIZE - 1] == '\0') {
+		console::printErrorMessage("Input is not in the correct format!");
+		console::print(PRESS_KEY_MESSAGE);
+		console::readkey();
+		return;
+	}
+
+	bool success = true;
+	const char* result = sha256::dehash(hash, success);
+
+	if (!success) {
+		console::printErrorMessage("Sha256 Manager was not able to read your message.");
+		console::print(PRESS_KEY_MESSAGE);
+		console::readkey();
+		return;
+	}
+
+	console::printl("Your message:\n");
+	console::printMessage(result);
+	console::printl("");
+	console::print(PRESS_KEY_MESSAGE);
 	console::readkey();
 }
 

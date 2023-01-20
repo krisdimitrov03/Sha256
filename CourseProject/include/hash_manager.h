@@ -9,7 +9,7 @@
 * @idnumber 8MI0600166
 * @compiler VC
 *
-* <declaration of hash function in hash_manager.cpp>
+* <declaration of hash and dehash functions in hash_manager.cpp>
 *
 */
 
@@ -21,4 +21,10 @@ namespace sha256 {
 	*   @return string - hashed message
 	**/
 	const char* hash(const char* message);
+
+	/**
+	*   @param hashedMessage - char*
+	*   @return char* - result if message can be dehashed
+	**/
+	const char* dehash(const char* hashedMessage, bool& success);
 }

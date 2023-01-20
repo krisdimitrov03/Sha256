@@ -15,7 +15,9 @@
 
 #include <iostream>
 #include "../include/hash_manager.h"
+#include "../include/file_manager.h"
 #include "../include/math_operator.h"
+#include "../include/string_operator.h"
 #include "../include/helper/size_constants.h"
 
 int** generateAtoHConstants();
@@ -50,6 +52,32 @@ const char* sha256::hash(const char* message) {
 	}
 
 	return getHash(hConstants);
+}
+
+const char* sha256::dehash(const char* hashedMessage, bool& success) {
+	int length = 0;
+	char** lines = file::readAllLines("writable.txt", length);
+
+	for (int i = 0; i < length; i++)
+	{
+		bool areEqual = true;
+		char* current = lines[i];
+		const char* hashFromFile = string::getHashSubstring(current, MAX_CHUNK_SIZE);
+
+		for (int i = 0; i < MAX_CHUNK_SIZE; i++)
+		{
+			if (hashFromFile[i] != hashedMessage[i]) {
+				areEqual = false;
+				break;
+			}
+		}
+
+		if (areEqual)
+			return string::getMessageSubstring(lines[i]);
+	}
+
+	success = false;
+	return "failed";
 }
 
 int* preProcessInput(const char* message, int length, int& destSize) {
