@@ -43,7 +43,10 @@ This is an application for hashing text message by `SHA-256` algorithm (part of 
 - ### Reading from file
   This functionality is implemented by `ifstream`, part of `<fstream>` library. The user is asked to type file name in the console and the message is being read from the file with this name. The default file for this is `readable.txt`. The method for this operation is `read()` placed in `file_manager.cpp`.
 - ### Writing in file
-  Writing text in file is realised in the `write()` and `writel()` methods in `file_manager.cpp`. It gets message to be written and file name and places the text in the file with the same name. The default file for this is `writable.txt`. For this functionality is used `ofstream`, part of `<fstream>` library.
+  Writing text in file is realised in the `write()` and `writel()` methods in `file_manager.cpp`. It gets message to be written and file name and places the text in the file with the same name. The default file for this is `writable.txt`. For this functionality is used `ofstream`, part of `<fstream>` library. Data is being written in the file in the following format:
+  ```
+  <message> : <hashed-message>
+  ```
 - ### Changing app theme
   This is the bonus part of the entire project. The user can choose from three color themes to change the appearence of the application:
   - **Dark**
