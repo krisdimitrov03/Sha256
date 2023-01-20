@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2022/2023
+*
+* @author Kristian Dimitrov
+* @idnumber 8MI0600166
+* @compiler VC
+*
+* <app run function and its helpers for case handling>
+*
+*/
+
 #include <iostream>
 #include "../include/console_operator.h"
 #include "../include/file_manager.h"

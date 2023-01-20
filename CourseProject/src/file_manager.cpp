@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2022/2023
+*
+* @author Kristian Dimitrov
+* @idnumber 8MI0600166
+* @compiler VC
+*
+* <functions for working with files>
+*
+*/
+
 #include <iostream>
 #include <fstream>
 #include "../include/helper/size_constants.h"

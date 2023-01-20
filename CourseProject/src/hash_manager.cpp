@@ -1,5 +1,19 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2022/2023
+*
+* @author Kristian Dimitrov
+* @idnumber 8MI0600166
+* @compiler VC
+*
+* <hash function and its helpers (all the stages of the algorithm)>
+*
+*/
+
 #include <iostream>
-#include <bitset>
 #include "../include/hash_manager.h"
 #include "../include/math_operator.h"
 #include "../include/helper/size_constants.h"

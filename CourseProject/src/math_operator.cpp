@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project # 6
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2022/2023
+*
+* @author Kristian Dimitrov
+* @idnumber 8MI0600166
+* @compiler VC
+*
+* <file with functions for mathematical calculations>
+*
+*/
+
 #include <iostream>
 #include "../include/math_operator.h"
 #include "../include/helper/size_constants.h"
@@ -10,6 +25,7 @@ bool math::isPrime(int number) {
 	for (int i = 2; i <= number / 2; ++i)
 		if (number % i == 0)
 			return false;
+	return true;
 }
 
 int* math::getFirstNPrimes(int count) {
@@ -84,7 +100,7 @@ int math::decimal(int* number, int length) {
 
 	for (int i = 0; i < length; i++)
 	{
-		result += number[length - i - 1] * pow(2, i);
+		result += number[length - i - 1] * (int)pow(2, i);
 	}
 
 	return result;
